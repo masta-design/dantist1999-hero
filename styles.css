@@ -504,20 +504,16 @@ input {
   transition: transform 120ms ease-out;
 }
 
-.dantist-hero__layer--4 {
+.dantist-hero__layer--3 {
   transform: translate3d(calc(var(--parallax-x) * -8px), calc(var(--parallax-y) * -4.5px), 0) scale(1.015);
 }
 
-.dantist-hero__layer--3 {
-  transform: translate3d(calc(var(--parallax-x) * 10px), calc(var(--parallax-y) * 6px), 0) scale(1.025);
-}
-
 .dantist-hero__layer--2 {
-  transform: translate3d(calc(var(--parallax-x) * 18px), calc(var(--parallax-y) * 10.5px), 0) scale(1.04);
+  transform: translate3d(calc(var(--parallax-x) * 6px), calc(var(--parallax-y) * 3.5px), 0) scale(1.02);
 }
 
 .dantist-hero__layer--1 {
-  transform: translate3d(calc(var(--parallax-x) * 28px), calc(var(--parallax-y) * 16.5px), 0) scale(1.06);
+  transform: translate3d(calc(var(--parallax-x) * 18px), calc(var(--parallax-y) * 10.5px), 0) scale(1.04);
 }
 
 @media (max-width: 1188px) {
