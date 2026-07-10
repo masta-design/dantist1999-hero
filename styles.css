@@ -1,0 +1,538 @@
+:root {
+  --hero-bg: #dae1e9;
+  --hero-body: #373a40;
+  --hero-secondary: #696f75;
+  --hero-green: #4e8c25;
+  --hero-green-light: #70bd2a;
+  --hero-green-hover: #61af2e;
+  --hero-green-hover-light: #87d441;
+  --hero-input-bg: #e8edf2;
+  --hero-input-hover-border: rgba(6, 32, 72, 0.35);
+  --hero-checkbox-border: rgba(3, 33, 81, 0.23);
+  --hero-error: #d60e0b;
+  --parallax-x: 0;
+  --parallax-y: 0;
+  --parallax-rotate-x: 0deg;
+  --parallax-rotate-y: 0deg;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--hero-body);
+  background: #ffffff;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.dantist-hero {
+  width: 100%;
+  overflow: hidden;
+  background: var(--hero-bg);
+}
+
+.dantist-hero__container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  max-width: 1140px;
+  min-height: 680px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.dantist-hero__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 48px 40px 48px 0;
+}
+
+.dantist-hero__heading {
+  width: 100%;
+}
+
+.dantist-hero__heading h1 {
+  margin: 0;
+  color: var(--hero-body);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 52px;
+  letter-spacing: 0;
+}
+
+.dantist-hero__heading p {
+  max-width: 530px;
+  margin: 20px 0 0;
+  color: var(--hero-secondary);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.dantist-hero__form {
+  width: 100%;
+}
+
+.dantist-hero__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 350px;
+  padding-top: 48px;
+}
+
+.dantist-hero__field {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.dantist-hero__field span {
+  flex: 0 0 62px;
+  color: var(--hero-body);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.dantist-hero__field input {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 12px;
+  color: var(--hero-body);
+  border: 0;
+  border-radius: 12px;
+  outline: none;
+  background: var(--hero-input-bg);
+  box-shadow: inset 0 0 0 1px transparent;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  transition: background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.dantist-hero__field input:hover {
+  background: var(--hero-input-bg);
+  box-shadow: inset 0 0 0 1px var(--hero-input-hover-border);
+}
+
+.dantist-hero__field input:focus {
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px var(--hero-green);
+}
+
+.dantist-hero__field.is-focused input {
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px var(--hero-green);
+}
+
+.dantist-hero__field.is-invalid input {
+  background: var(--hero-input-bg);
+  box-shadow: inset 0 0 0 1px var(--hero-error);
+}
+
+.dantist-hero__field.is-disabled {
+  opacity: 0.5;
+}
+
+.dantist-hero__field input:disabled {
+  color: var(--hero-body);
+  background: var(--hero-input-bg);
+  box-shadow: inset 0 0 0 1px transparent;
+  cursor: not-allowed;
+}
+
+.dantist-hero__consent {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  padding-top: 32px;
+  color: var(--hero-body);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.dantist-hero__consent input {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  opacity: 0;
+}
+
+.dantist-hero__checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  border-radius: 6px;
+  background-color: var(--hero-input-bg);
+  box-shadow: inset 0 0 0 1px var(--hero-checkbox-border);
+  cursor: pointer;
+  transition: background 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.dantist-hero__checkbox svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  fill: #ffffff;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.dantist-hero__consent:hover .dantist-hero__checkbox {
+  background-color: var(--hero-input-bg);
+  box-shadow: inset 0 0 0 1px var(--hero-input-hover-border);
+}
+
+.dantist-hero__consent input:focus + .dantist-hero__checkbox,
+.dantist-hero__consent input:focus-visible + .dantist-hero__checkbox {
+  background-color: #ffffff;
+  box-shadow: inset 0 0 0 1px var(--hero-green);
+}
+
+.dantist-hero__consent input:checked + .dantist-hero__checkbox {
+  background: linear-gradient(180deg, var(--hero-green-light) 0%, var(--hero-green) 100%);
+  box-shadow: inset 0 0 0 1px transparent;
+}
+
+.dantist-hero__consent input:checked + .dantist-hero__checkbox svg {
+  opacity: 1;
+}
+
+.dantist-hero__consent:hover input:checked + .dantist-hero__checkbox {
+  background: linear-gradient(180deg, var(--hero-green-hover-light) 0%, var(--hero-green-hover) 100%);
+}
+
+.dantist-hero__consent input:checked:focus + .dantist-hero__checkbox,
+.dantist-hero__consent input:checked:focus-visible + .dantist-hero__checkbox {
+  background: linear-gradient(180deg, var(--hero-green-light) 0%, var(--hero-green) 100%);
+  box-shadow: inset 0 0 0 1px #16181c;
+}
+
+.dantist-hero__consent input:disabled + .dantist-hero__checkbox {
+  background-color: var(--hero-input-bg);
+  box-shadow: inset 0 0 0 1px transparent;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.dantist-hero__consent input:checked:disabled + .dantist-hero__checkbox {
+  opacity: 0.5;
+}
+
+.dantist-hero__consent.is-invalid .dantist-hero__checkbox {
+  background-color: var(--hero-input-bg);
+  box-shadow: inset 0 0 0 1px var(--hero-error);
+}
+
+.dantist-hero__consent.is-invalid .dantist-hero__checkbox svg {
+  opacity: 0;
+}
+
+.dantist-hero__consent a {
+  color: var(--hero-green);
+  text-decoration: none;
+}
+
+.dantist-hero__consent a:hover {
+  text-decoration: underline;
+}
+
+.dantist-hero__submit {
+  isolation: isolate;
+  position: relative;
+  z-index: 0;
+  min-width: 184px;
+  min-height: 48px;
+  margin-top: 24px;
+  padding: 12px 24px;
+  overflow: visible;
+  color: #ffffff;
+  border: 0;
+  border-radius: 23px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.52px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: transform 160ms ease;
+}
+
+.dantist-hero__submit::before,
+.dantist-hero__submit::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+  content: "";
+  pointer-events: none;
+}
+
+.dantist-hero__submit::before {
+  z-index: 0;
+  background: linear-gradient(180deg, var(--hero-green-light) 0%, var(--hero-green) 100%);
+  animation: dantist-hero-submit-pulse 5s ease-in-out infinite;
+}
+
+.dantist-hero__submit::after {
+  z-index: 1;
+  background: linear-gradient(180deg, var(--hero-green-hover-light) 0%, var(--hero-green-hover) 100%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.dantist-hero__submit:hover::after {
+  opacity: 1;
+  transition-duration: 0ms;
+}
+
+.dantist-hero__submit span {
+  position: relative;
+  z-index: 2;
+}
+
+.dantist-hero__submit:active {
+  transform: translateY(1px);
+}
+
+.dantist-hero__submit:focus-visible {
+  outline: 3px solid rgba(78, 140, 37, 0.25);
+  outline-offset: 3px;
+}
+
+@keyframes dantist-hero-submit-pulse {
+  0%,
+  86%,
+  100% {
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(78, 140, 37, 0);
+  }
+
+  90% {
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25), 0 0 0 7px rgba(112, 189, 42, 0.28);
+  }
+
+  94% {
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25), 0 0 0 14px rgba(112, 189, 42, 0);
+  }
+}
+
+.dantist-hero__message {
+  max-width: 530px;
+  min-height: 20px;
+  margin: 12px 0 0;
+  color: var(--hero-green);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.dantist-hero__message.is-error {
+  color: var(--hero-error);
+}
+
+.dantist-hero__message:empty {
+  display: none;
+}
+
+.dantist-hero__image {
+  position: relative;
+  align-self: end;
+  width: 100%;
+  aspect-ratio: 570 / 680;
+  overflow: hidden;
+  perspective: 900px;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.dantist-hero__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  transition: transform 120ms ease-out;
+}
+
+.dantist-hero__layer--4 {
+  transform: translate3d(calc(var(--parallax-x) * -8px), calc(var(--parallax-y) * -4.5px), 0) scale(1.015);
+}
+
+.dantist-hero__layer--3 {
+  transform: translate3d(calc(var(--parallax-x) * 10px), calc(var(--parallax-y) * 6px), 0) scale(1.025);
+}
+
+.dantist-hero__layer--2 {
+  transform: translate3d(calc(var(--parallax-x) * 18px), calc(var(--parallax-y) * 10.5px), 0) scale(1.04);
+}
+
+.dantist-hero__layer--1 {
+  transform: translate3d(calc(var(--parallax-x) * 28px), calc(var(--parallax-y) * 16.5px), 0) scale(1.06);
+}
+
+@media (max-width: 1188px) {
+  .dantist-hero {
+    padding: 0 24px;
+  }
+
+  .dantist-hero__container {
+    min-height: 672px;
+  }
+
+  .dantist-hero__content {
+    padding: 48px 40px 48px 0;
+  }
+
+  .dantist-hero__image {
+    width: 100%;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 840px) {
+  .dantist-hero__container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, fit-content(100%));
+    min-height: 763px;
+  }
+
+  .dantist-hero__content {
+    gap: 40px;
+    justify-content: flex-start;
+    padding: 48px 0;
+  }
+
+  .dantist-hero__heading p {
+    max-width: 792px;
+  }
+
+  .dantist-hero__form {
+    display: grid;
+    grid-template-columns: minmax(0, 350px) minmax(0, 1fr);
+    column-gap: 24px;
+    align-items: start;
+  }
+
+  .dantist-hero__fields {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    padding-top: 0;
+  }
+
+  .dantist-hero__consent {
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 0;
+  }
+
+  .dantist-hero__submit {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+  }
+
+  .dantist-hero__message {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .dantist-hero__image {
+    justify-self: center;
+    width: 100%;
+    max-width: 400px;
+    max-height: 477px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dantist-hero {
+    padding: 0 16px;
+  }
+
+  .dantist-hero__container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, fit-content(100%));
+    min-height: auto;
+  }
+
+  .dantist-hero__content {
+    gap: 40px;
+    padding: 32px 0;
+  }
+
+  .dantist-hero__heading h1 {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .dantist-hero__heading p {
+    max-width: 792px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .dantist-hero__fields {
+    padding-top: 0;
+  }
+
+  .dantist-hero__image {
+    justify-self: center;
+    width: 100%;
+    max-width: 400px;
+    max-height: 477px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dantist-hero__container {
+    min-height: auto;
+  }
+
+  .dantist-hero__field {
+    max-width: 350px;
+  }
+
+  .dantist-hero__image {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dantist-hero__layer,
+  .dantist-hero__submit,
+  .dantist-hero__submit::after {
+    transition: none;
+  }
+
+  .dantist-hero__submit::before {
+    animation: none;
+  }
+
+  .dantist-hero__layer {
+    transform: none;
+  }
+}

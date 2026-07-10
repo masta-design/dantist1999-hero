@@ -1,0 +1,7 @@
+.agents/
+.codex/
+.edge-profile/
+codex-*.png
+*.log
+Thumbs.db
+.DS_Store

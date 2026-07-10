@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dantist1999 Hero</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <section class="dantist-hero" aria-labelledby="dantist-hero-title">
+        <div class="dantist-hero__container">
+          <div class="dantist-hero__content">
+            <div class="dantist-hero__heading">
+              <h1 id="dantist-hero-title">Здоровые улыбки для&nbsp;всей семьи</h1>
+              <p>Современное лечение зубов для&nbsp;взрослых и&nbsp;детей. Оставьте заявку&nbsp;&mdash; мы&nbsp;свяжемся с&nbsp;вами.</p>
+            </div>
+
+            <form class="dantist-hero__form" novalidate>
+              <div class="dantist-hero__fields">
+                <label class="dantist-hero__field">
+                  <span>Имя</span>
+                  <input type="text" name="name" autocomplete="name" aria-label="Имя" />
+                </label>
+
+                <label class="dantist-hero__field">
+                  <span>Телефон</span>
+                  <input type="tel" name="phone" autocomplete="tel" inputmode="tel" pattern="[0-9+\s()\-]*" aria-label="Телефон" />
+                </label>
+              </div>
+
+              <label class="dantist-hero__consent">
+                <input type="checkbox" name="consent" />
+                <span class="dantist-hero__checkbox" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" focusable="false">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M12.6876 3.92773C13.0103 3.92797 13.203 4.30155 12.9962 4.5625L7.27353 11.8164L7.27255 11.8174C7.00172 12.1571 6.48351 12.1586 6.21298 11.8164L3.00302 7.75C2.79967 7.49209 2.98396 7.11245 3.31259 7.1123H4.13193C4.23378 7.11248 4.33524 7.13614 4.42685 7.18066C4.51833 7.22523 4.59923 7.29017 4.6622 7.37012L6.74228 10.0068L11.339 4.18457C11.4667 4.02126 11.6626 3.92785 11.8683 3.92773H12.6876Z"
+                    />
+                  </svg>
+                </span>
+                <span class="dantist-hero__consent-text">
+                  Даю согласие на&nbsp;<a href="#" aria-label="Открыть условия обработки персональных данных">обработку моих персональных данных</a>, включая имя и&nbsp;телефона для&nbsp;оформления обратного звонка
+                </span>
+              </label>
+
+              <button class="dantist-hero__submit" type="submit"><span>Отправить заявку</span></button>
+              <p class="dantist-hero__message" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div class="dantist-hero__image" aria-hidden="true">
+            <img class="dantist-hero__layer dantist-hero__layer--4" src="assets/layer-4.webp" alt="" />
+            <img class="dantist-hero__layer dantist-hero__layer--3" src="assets/layer-3.webp" alt="" />
+            <img class="dantist-hero__layer dantist-hero__layer--2" src="assets/layer-2.webp" alt="" />
+            <img class="dantist-hero__layer dantist-hero__layer--1" src="assets/layer-1.webp" alt="" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
