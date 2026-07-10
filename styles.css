@@ -54,7 +54,101 @@ input {
   justify-content: center;
   align-items: flex-start;
   min-width: 0;
-  padding: 48px 40px 48px 0;
+  padding: 32px 40px 48px 0;
+}
+
+.dantist-hero__initial,
+.dantist-hero__success {
+  width: 100%;
+}
+
+.dantist-hero__initial {
+  display: flex;
+  flex-direction: column;
+  animation: dantist-hero-state-in 260ms ease both;
+}
+
+.dantist-hero__success {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  animation: dantist-hero-state-in 260ms ease both;
+}
+
+.dantist-hero.is-submitted .dantist-hero__initial {
+  display: none;
+}
+
+.dantist-hero.is-submitted .dantist-hero__success {
+  display: flex;
+}
+
+.dantist-hero__success-icon {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 24px;
+}
+
+.dantist-hero__success-icon svg {
+  display: block;
+  width: 128px;
+  height: 128px;
+}
+
+.dantist-hero__success-body {
+  width: 100%;
+}
+
+.dantist-hero__success-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.dantist-hero__success-text h2 {
+  margin: 0;
+  color: var(--hero-body);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 52px;
+  letter-spacing: 0;
+}
+
+.dantist-hero__success-text p {
+  margin: 0;
+  color: var(--hero-secondary);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.dantist-hero__success-text strong {
+  color: var(--hero-body);
+  font-weight: 400;
+}
+
+.dantist-hero__success-button {
+  min-width: 140px;
+}
+
+.dantist-hero__success-button::before {
+  animation: none;
+}
+
+@keyframes dantist-hero-state-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .dantist-hero__heading {
@@ -82,6 +176,7 @@ input {
 }
 
 .dantist-hero__form {
+  position: relative;
   width: 100%;
 }
 
@@ -144,6 +239,11 @@ input {
 .dantist-hero__field.is-invalid input {
   background: var(--hero-input-bg);
   box-shadow: inset 0 0 0 1px var(--hero-error);
+}
+
+.dantist-hero__field.is-shaking input,
+.dantist-hero__consent.is-shaking .dantist-hero__checkbox {
+  animation: dantist-hero-invalid-shake 280ms ease;
 }
 
 .dantist-hero__field.is-disabled {
@@ -341,10 +441,35 @@ input {
   }
 }
 
+@keyframes dantist-hero-invalid-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-4px);
+  }
+
+  40% {
+    transform: translateX(4px);
+  }
+
+  60% {
+    transform: translateX(-3px);
+  }
+
+  80% {
+    transform: translateX(3px);
+  }
+}
+
 .dantist-hero__message {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
   max-width: 530px;
-  min-height: 20px;
-  margin: 12px 0 0;
+  margin: 0;
   color: var(--hero-green);
   font-size: 13px;
   line-height: 20px;
@@ -405,7 +530,7 @@ input {
   }
 
   .dantist-hero__content {
-    padding: 48px 40px 48px 0;
+    padding: 32px 40px 48px 0;
   }
 
   .dantist-hero__image {
@@ -420,10 +545,38 @@ input {
     min-height: 763px;
   }
 
+  .dantist-hero.is-submitted .dantist-hero__container {
+    grid-template-rows: 308px fit-content(100%);
+  }
+
   .dantist-hero__content {
-    gap: 40px;
     justify-content: flex-start;
     padding: 48px 0;
+  }
+
+  .dantist-hero__initial {
+    gap: 40px;
+  }
+
+  .dantist-hero.is-submitted .dantist-hero__content {
+    justify-content: center;
+    padding: 32px 0 48px;
+  }
+
+  .dantist-hero.is-submitted .dantist-hero__success {
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  .dantist-hero.is-submitted .dantist-hero__success-icon {
+    flex: 0 0 128px;
+    width: 128px;
+    padding-bottom: 24px;
+  }
+
+  .dantist-hero.is-submitted .dantist-hero__success-body {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .dantist-hero__heading p {
@@ -480,8 +633,25 @@ input {
   }
 
   .dantist-hero__content {
-    gap: 40px;
     padding: 32px 0;
+  }
+
+  .dantist-hero__initial {
+    gap: 40px;
+  }
+
+  .dantist-hero.is-submitted .dantist-hero__container {
+    grid-template-rows: 356px fit-content(100%);
+  }
+
+  .dantist-hero.is-submitted .dantist-hero__content {
+    justify-content: center;
+    padding: 32px 0;
+  }
+
+  .dantist-hero__success-icon svg {
+    width: 64px;
+    height: 64px;
   }
 
   .dantist-hero__heading h1 {
@@ -489,8 +659,18 @@ input {
     line-height: 40px;
   }
 
+  .dantist-hero__success-text h2 {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
   .dantist-hero__heading p {
     max-width: 792px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .dantist-hero__success-text p {
     font-size: 16px;
     line-height: 24px;
   }
@@ -523,8 +703,13 @@ input {
 
 @media (prefers-reduced-motion: reduce) {
   .dantist-hero__layer,
+  .dantist-hero__initial,
+  .dantist-hero__success,
+  .dantist-hero__field.is-shaking input,
+  .dantist-hero__consent.is-shaking .dantist-hero__checkbox,
   .dantist-hero__submit,
   .dantist-hero__submit::after {
+    animation: none;
     transition: none;
   }
 
