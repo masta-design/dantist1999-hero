@@ -1,21 +1,20 @@
 (function () {
-  const root = document.documentElement;
   const hero = document.querySelector(".dantist-hero");
   const image = document.querySelector(".dantist-hero__image");
   const form = document.querySelector(".dantist-hero__form");
 
   if (hero && image && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const resetParallax = () => {
-      root.style.setProperty("--parallax-x", "0");
-      root.style.setProperty("--parallax-y", "0");
+      hero.style.setProperty("--parallax-x", "0");
+      hero.style.setProperty("--parallax-y", "0");
     };
 
     window.addEventListener("pointermove", (event) => {
       const x = (event.clientX / window.innerWidth - 0.5) * 2;
       const y = (event.clientY / window.innerHeight - 0.5) * 2;
 
-      root.style.setProperty("--parallax-x", x.toFixed(4));
-      root.style.setProperty("--parallax-y", y.toFixed(4));
+      hero.style.setProperty("--parallax-x", x.toFixed(4));
+      hero.style.setProperty("--parallax-y", y.toFixed(4));
     });
 
     window.addEventListener("pointerleave", resetParallax);

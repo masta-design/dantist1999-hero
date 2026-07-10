@@ -1,5 +1,6 @@
-:root {
+.dantist-hero {
   --hero-bg: #dae1e9;
+  --hero-white: #ffffff;
   --hero-body: #373a40;
   --hero-secondary: #696f75;
   --hero-green: #4e8c25;
@@ -10,32 +11,52 @@
   --hero-input-hover-border: rgba(6, 32, 72, 0.35);
   --hero-checkbox-border: rgba(3, 33, 81, 0.23);
   --hero-error: #d60e0b;
+  --hero-focus-dark: #16181c;
+  --hero-focus-ring: rgba(78, 140, 37, 0.25);
+  --hero-button-shadow: rgba(0, 0, 0, 0.25);
+  --hero-pulse: rgba(112, 189, 42, 0.28);
+  --hero-pulse-transparent: rgba(112, 189, 42, 0);
+  --hero-green-transparent: rgba(78, 140, 37, 0);
+  --hero-font-body: Roboto, Arial, sans-serif;
+  --hero-font-heading: Georgia, "Times New Roman", serif;
+  --hero-title-size: 48px;
+  --hero-title-line: 52px;
+  --hero-title-size-mobile: 36px;
+  --hero-title-line-mobile: 40px;
+  --hero-text-size: 20px;
+  --hero-text-line: 28px;
+  --hero-text-size-mobile: 16px;
+  --hero-text-line-mobile: 24px;
+  --hero-label-size: 15px;
+  --hero-label-line: 24px;
+  --hero-caption-size: 13px;
+  --hero-caption-line: 20px;
+  --hero-button-size: 13px;
+  --hero-button-line: 24px;
   --parallax-x: 0;
   --parallax-y: 0;
-  --parallax-rotate-x: 0deg;
-  --parallax-rotate-y: 0deg;
 }
 
-* {
+.dantist-hero,
+.dantist-hero * {
   box-sizing: border-box;
 }
 
-body {
+.dantist-hero-page {
   margin: 0;
-  color: var(--hero-body);
-  background: #ffffff;
-  font-family: Roboto, Arial, sans-serif;
+  background: var(--hero-white, #ffffff);
 }
 
-button,
-input {
+.dantist-hero :where(button, input) {
   font: inherit;
 }
 
 .dantist-hero {
   width: 100%;
   overflow: hidden;
+  color: var(--hero-body);
   background: var(--hero-bg);
+  font-family: var(--hero-font-body);
 }
 
 .dantist-hero__container {
@@ -107,23 +128,28 @@ input {
   width: 100%;
 }
 
+.dantist-hero__heading h1,
 .dantist-hero__success-text h2 {
   margin: 0;
   color: var(--hero-body);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 48px;
+  font-family: var(--hero-font-heading);
+  font-size: var(--hero-title-size);
   font-weight: 400;
-  line-height: 52px;
+  line-height: var(--hero-title-line);
+  letter-spacing: 0;
+}
+
+.dantist-hero__heading p,
+.dantist-hero__success-text p {
+  color: var(--hero-secondary);
+  font-size: var(--hero-text-size);
+  font-weight: 400;
+  line-height: var(--hero-text-line);
   letter-spacing: 0;
 }
 
 .dantist-hero__success-text p {
   margin: 0;
-  color: var(--hero-secondary);
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 28px;
-  letter-spacing: 0;
 }
 
 .dantist-hero__success-text strong {
@@ -155,24 +181,9 @@ input {
   width: 100%;
 }
 
-.dantist-hero__heading h1 {
-  margin: 0;
-  color: var(--hero-body);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 48px;
-  font-weight: 400;
-  line-height: 52px;
-  letter-spacing: 0;
-}
-
 .dantist-hero__heading p {
   max-width: 530px;
   margin: 20px 0 0;
-  color: var(--hero-secondary);
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 28px;
-  letter-spacing: 0;
 }
 
 .dantist-hero__form {
@@ -199,9 +210,9 @@ input {
 .dantist-hero__field span {
   flex: 0 0 62px;
   color: var(--hero-body);
-  font-size: 15px;
+  font-size: var(--hero-label-size);
   font-weight: 400;
-  line-height: 24px;
+  line-height: var(--hero-label-line);
 }
 
 .dantist-hero__field input {
@@ -215,9 +226,9 @@ input {
   outline: none;
   background: var(--hero-input-bg);
   box-shadow: inset 0 0 0 1px transparent;
-  font-size: 15px;
+  font-size: var(--hero-label-size);
   font-weight: 400;
-  line-height: 24px;
+  line-height: var(--hero-label-line);
   transition: background-color 160ms ease, box-shadow 160ms ease;
 }
 
@@ -227,12 +238,12 @@ input {
 }
 
 .dantist-hero__field input:focus {
-  background: #ffffff;
+  background: var(--hero-white);
   box-shadow: inset 0 0 0 1px var(--hero-green);
 }
 
 .dantist-hero__field.is-focused input {
-  background: #ffffff;
+  background: var(--hero-white);
   box-shadow: inset 0 0 0 1px var(--hero-green);
 }
 
@@ -265,9 +276,9 @@ input {
   width: 100%;
   padding-top: 32px;
   color: var(--hero-body);
-  font-size: 13px;
+  font-size: var(--hero-caption-size);
   font-weight: 400;
-  line-height: 20px;
+  line-height: var(--hero-caption-line);
 }
 
 .dantist-hero__consent input {
@@ -296,7 +307,7 @@ input {
   display: block;
   width: 16px;
   height: 16px;
-  fill: #ffffff;
+  fill: var(--hero-white);
   opacity: 0;
   transition: opacity 160ms ease;
 }
@@ -308,7 +319,7 @@ input {
 
 .dantist-hero__consent input:focus + .dantist-hero__checkbox,
 .dantist-hero__consent input:focus-visible + .dantist-hero__checkbox {
-  background-color: #ffffff;
+  background-color: var(--hero-white);
   box-shadow: inset 0 0 0 1px var(--hero-green);
 }
 
@@ -328,7 +339,7 @@ input {
 .dantist-hero__consent input:checked:focus + .dantist-hero__checkbox,
 .dantist-hero__consent input:checked:focus-visible + .dantist-hero__checkbox {
   background: linear-gradient(180deg, var(--hero-green-light) 0%, var(--hero-green) 100%);
-  box-shadow: inset 0 0 0 1px #16181c;
+  box-shadow: inset 0 0 0 1px var(--hero-focus-dark);
 }
 
 .dantist-hero__consent input:disabled + .dantist-hero__checkbox {
@@ -369,14 +380,14 @@ input {
   margin-top: 24px;
   padding: 12px 24px;
   overflow: visible;
-  color: #ffffff;
+  color: var(--hero-white);
   border: 0;
   border-radius: 999px;
   background: transparent;
   cursor: pointer;
-  font-size: 13px;
+  font-size: var(--hero-button-size);
   font-weight: 500;
-  line-height: 24px;
+  line-height: var(--hero-button-line);
   letter-spacing: 0.52px;
   text-align: center;
   text-transform: uppercase;
@@ -388,7 +399,7 @@ input {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 -2px 0 var(--hero-button-shadow);
   content: "";
   pointer-events: none;
 }
@@ -421,7 +432,7 @@ input {
 }
 
 .dantist-hero__submit:focus-visible {
-  outline: 3px solid rgba(78, 140, 37, 0.25);
+  outline: 3px solid var(--hero-focus-ring);
   outline-offset: 3px;
 }
 
@@ -429,15 +440,15 @@ input {
   0%,
   86%,
   100% {
-    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(78, 140, 37, 0);
+    box-shadow: inset 0 -2px 0 var(--hero-button-shadow), 0 0 0 0 var(--hero-green-transparent);
   }
 
   91% {
-    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25), 0 0 0 7px rgba(112, 189, 42, 0.28);
+    box-shadow: inset 0 -2px 0 var(--hero-button-shadow), 0 0 0 7px var(--hero-pulse);
   }
 
   96% {
-    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25), 0 0 0 14px rgba(112, 189, 42, 0);
+    box-shadow: inset 0 -2px 0 var(--hero-button-shadow), 0 0 0 14px var(--hero-pulse-transparent);
   }
 }
 
@@ -471,8 +482,8 @@ input {
   max-width: 530px;
   margin: 0;
   color: var(--hero-green);
-  font-size: 13px;
-  line-height: 20px;
+  font-size: var(--hero-caption-size);
+  line-height: var(--hero-caption-line);
 }
 
 .dantist-hero__message.is-error {
@@ -651,24 +662,24 @@ input {
   }
 
   .dantist-hero__heading h1 {
-    font-size: 36px;
-    line-height: 40px;
+    font-size: var(--hero-title-size-mobile);
+    line-height: var(--hero-title-line-mobile);
   }
 
   .dantist-hero__success-text h2 {
-    font-size: 36px;
-    line-height: 40px;
+    font-size: var(--hero-title-size-mobile);
+    line-height: var(--hero-title-line-mobile);
   }
 
   .dantist-hero__heading p {
     max-width: 792px;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: var(--hero-text-size-mobile);
+    line-height: var(--hero-text-line-mobile);
   }
 
   .dantist-hero__success-text p {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: var(--hero-text-size-mobile);
+    line-height: var(--hero-text-line-mobile);
   }
 
   .dantist-hero__fields {
