@@ -683,7 +683,16 @@
   }
 
   .dantist-hero__fields {
+    max-width: none;
     padding-top: 0;
+  }
+
+  .dantist-hero__field {
+    max-width: none;
+  }
+
+  .dantist-hero__submit {
+    width: 100%;
   }
 
   .dantist-hero__image {
@@ -697,10 +706,6 @@
 @media (max-width: 480px) {
   .dantist-hero__container {
     min-height: auto;
-  }
-
-  .dantist-hero__field {
-    max-width: 350px;
   }
 
   .dantist-hero__image {
