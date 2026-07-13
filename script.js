@@ -32,6 +32,82 @@
   const success = hero.querySelector(".dantist-hero__success");
   const successPhone = hero.querySelector("[data-success-phone]");
   const successButton = hero.querySelector(".dantist-hero__success-button");
+  const phonePrefix = "+7 ";
+  const phoneMaxDigits = 10;
+  const phoneDigitPositions = [3, 4, 5, 7, 8, 9, 11, 12, 14, 15];
+  let phoneDigits = "";
+
+  const getPhoneDigitsFromValue = (value) => {
+    const digits = value.replace(/\D/g, "");
+
+    if (digits.startsWith("7")) {
+      return digits.slice(1, phoneMaxDigits + 1);
+    }
+
+    return digits.slice(0, phoneMaxDigits);
+  };
+
+  const formatPhone = () => {
+    const mask = "___ ___-__-__".split("");
+    let digitIndex = 0;
+
+    mask.forEach((symbol, index) => {
+      if (symbol === "_" && phoneDigits[digitIndex]) {
+        mask[index] = phoneDigits[digitIndex];
+        digitIndex += 1;
+      } else if (symbol === "_") {
+        digitIndex += 1;
+      }
+    });
+
+    return phonePrefix + mask.join("");
+  };
+
+  const getPhoneCaretPosition = () => {
+    if (phoneDigits.length === 0) {
+      return phonePrefix.length;
+    }
+
+    return phoneDigitPositions[phoneDigits.length - 1] + 1;
+  };
+
+  const hasPhoneTail = () => phoneDigits.length > 0;
+
+  const removeSelectedPhoneDigits = () => {
+    const selectionStart = phoneInput.selectionStart || 0;
+    const selectionEnd = phoneInput.selectionEnd || 0;
+
+    if (selectionStart === selectionEnd) {
+      return false;
+    }
+
+    const nextDigits = phoneDigits
+      .split("")
+      .filter((_, index) => {
+        const digitPosition = phoneDigitPositions[index];
+        return digitPosition < selectionStart || digitPosition >= selectionEnd;
+      })
+      .join("");
+
+    phoneDigits = nextDigits;
+    return true;
+  };
+
+  const setPhoneCaret = () => {
+    if (document.activeElement !== phoneInput) {
+      return;
+    }
+
+    const caretPosition = getPhoneCaretPosition();
+    phoneInput.setSelectionRange(caretPosition, caretPosition);
+  };
+
+  const normalizePhone = () => {
+    phoneDigits = getPhoneDigitsFromValue(phoneInput.value);
+    phoneInput.value = formatPhone();
+    setPhoneCaret();
+    refreshPhoneFieldState();
+  };
 
   const setFieldState = (input, isValid) => {
     const field = input.closest(".dantist-hero__field");
@@ -45,6 +121,12 @@
     consentInput.setAttribute("aria-invalid", String(!isValid));
   };
 
+  const refreshPhoneFieldState = () => {
+    if (phoneInput.getAttribute("aria-invalid") === "true") {
+      setFieldState(phoneInput, hasPhoneTail());
+    }
+  };
+
   const triggerShake = (element) => {
     element.classList.remove("is-shaking");
     void element.offsetWidth;
@@ -56,7 +138,7 @@
       triggerShake(nameInput.closest(".dantist-hero__field"));
     }
 
-    if (phoneInput.value.trim().length === 0) {
+    if (!hasPhoneTail()) {
       triggerShake(phoneInput.closest(".dantist-hero__field"));
     }
 
@@ -66,12 +148,12 @@
   };
 
   const sanitizePhone = () => {
-    phoneInput.value = phoneInput.value.replace(/[^0-9+\s()-]/g, "");
+    normalizePhone();
   };
 
   const validate = () => {
     const isNameValid = nameInput.value.trim().length > 0;
-    const isPhoneValid = phoneInput.value.trim().length > 0;
+    const isPhoneValid = hasPhoneTail();
     const isConsentValid = consentInput.checked;
 
     setFieldState(nameInput, isNameValid);
@@ -98,6 +180,7 @@
     hero.classList.add("is-submitted");
     success.setAttribute("aria-hidden", "false");
     form.reset();
+    normalizePhone();
     setFieldState(nameInput, true);
     setFieldState(phoneInput, true);
     setConsentState(true);
@@ -131,11 +214,60 @@
 
     input.addEventListener("input", () => {
       if (input.getAttribute("aria-invalid") === "true") {
-        setFieldState(input, input.value.trim().length > 0);
+        const isInputValid = input === phoneInput ? hasPhoneTail() : input.value.trim().length > 0;
+        setFieldState(input, isInputValid);
       }
     });
   });
 
+  normalizePhone();
+  phoneInput.addEventListener("focus", setPhoneCaret);
+  phoneInput.addEventListener("keydown", (event) => {
+    if (event.ctrlKey || event.metaKey || event.altKey || event.key === "Tab") {
+      return;
+    }
+
+    if (/^\d$/.test(event.key)) {
+      event.preventDefault();
+      removeSelectedPhoneDigits();
+
+      if (phoneDigits.length < phoneMaxDigits) {
+        phoneDigits += event.key;
+        phoneInput.value = formatPhone();
+        setPhoneCaret();
+        refreshPhoneFieldState();
+      }
+
+      return;
+    }
+
+    if (event.key === "Backspace") {
+      event.preventDefault();
+      if (!removeSelectedPhoneDigits()) {
+        phoneDigits = phoneDigits.slice(0, -1);
+      }
+      phoneInput.value = formatPhone();
+      setPhoneCaret();
+      refreshPhoneFieldState();
+      return;
+    }
+
+    if (event.key === "Delete") {
+      event.preventDefault();
+      removeSelectedPhoneDigits();
+      phoneInput.value = formatPhone();
+      setPhoneCaret();
+      refreshPhoneFieldState();
+    }
+  });
+  phoneInput.addEventListener("paste", (event) => {
+    event.preventDefault();
+    const pastedText = event.clipboardData.getData("text");
+    phoneDigits = getPhoneDigitsFromValue(pastedText);
+    phoneInput.value = formatPhone();
+    setPhoneCaret();
+    refreshPhoneFieldState();
+  });
   phoneInput.addEventListener("input", sanitizePhone);
 
   consentInput.addEventListener("change", () => {

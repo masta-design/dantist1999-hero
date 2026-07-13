@@ -14,13 +14,15 @@
   --hero-focus-dark: #16181c;
   --hero-focus-ring: rgba(78, 140, 37, 0.25);
   --hero-button-shadow: rgba(0, 0, 0, 0.25);
-  --hero-pulse: rgba(112, 189, 42, 0.28);
-  --hero-pulse-transparent: rgba(112, 189, 42, 0);
-  --hero-green-transparent: rgba(78, 140, 37, 0);
+  --hero-phone-button-shadow: rgba(0, 0, 0, 0.15);
+  --hero-phone-button-top: #f3f5f8;
+  --hero-phone-button-bottom: #cdd7e3;
+  --hero-phone-button-hover-top: #ffffff;
+  --hero-phone-button-hover-bottom: #d9e1eb;
   --hero-font-body: Roboto, Arial, sans-serif;
   --hero-font-heading: Georgia, "Times New Roman", serif;
   --hero-title-size: 48px;
-  --hero-title-line: 52px;
+  --hero-title-line: 48px;
   --hero-title-size-mobile: 36px;
   --hero-title-line-mobile: 40px;
   --hero-text-size: 20px;
@@ -29,6 +31,7 @@
   --hero-text-line-mobile: 24px;
   --hero-label-size: 15px;
   --hero-label-line: 24px;
+  --hero-field-label-line: 20px;
   --hero-caption-size: 13px;
   --hero-caption-line: 20px;
   --hero-button-size: 13px;
@@ -159,6 +162,7 @@
 
 .dantist-hero__success-button {
   min-width: 140px;
+  margin-top: 24px;
 }
 
 .dantist-hero__success-button::before {
@@ -202,57 +206,68 @@
 
 .dantist-hero__field {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  position: relative;
   width: 100%;
+  height: 64px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--hero-input-bg);
+  box-shadow: inset 0 0 0 1px transparent;
+  transition: background-color 160ms ease, box-shadow 160ms ease;
 }
 
 .dantist-hero__field span {
-  flex: 0 0 62px;
+  width: 100%;
+  min-width: 0;
   color: var(--hero-body);
   font-size: var(--hero-label-size);
   font-weight: 400;
-  line-height: var(--hero-label-line);
+  line-height: var(--hero-field-label-line);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .dantist-hero__field input {
   width: 100%;
   min-width: 0;
-  height: 48px;
-  padding: 12px;
+  height: 24px;
+  padding: 0;
   color: var(--hero-body);
   border: 0;
-  border-radius: 12px;
+  border-radius: 0;
   outline: none;
-  background: var(--hero-input-bg);
-  box-shadow: inset 0 0 0 1px transparent;
+  background: transparent;
+  box-shadow: none;
   font-size: var(--hero-label-size);
   font-weight: 400;
   line-height: var(--hero-label-line);
-  transition: background-color 160ms ease, box-shadow 160ms ease;
 }
 
-.dantist-hero__field input:hover {
+.dantist-hero__field:hover {
   background: var(--hero-input-bg);
   box-shadow: inset 0 0 0 1px var(--hero-input-hover-border);
 }
 
-.dantist-hero__field input:focus {
+.dantist-hero__field:focus-within {
   background: var(--hero-white);
   box-shadow: inset 0 0 0 1px var(--hero-green);
 }
 
-.dantist-hero__field.is-focused input {
+.dantist-hero__field.is-focused {
   background: var(--hero-white);
   box-shadow: inset 0 0 0 1px var(--hero-green);
 }
 
-.dantist-hero__field.is-invalid input {
+.dantist-hero__field.is-invalid {
   background: var(--hero-input-bg);
   box-shadow: inset 0 0 0 1px var(--hero-error);
 }
 
-.dantist-hero__field.is-shaking input,
+.dantist-hero__field.is-shaking,
 .dantist-hero__consent.is-shaking .dantist-hero__checkbox {
   animation: dantist-hero-invalid-shake 280ms ease;
 }
@@ -263,8 +278,8 @@
 
 .dantist-hero__field input:disabled {
   color: var(--hero-body);
-  background: var(--hero-input-bg);
-  box-shadow: inset 0 0 0 1px transparent;
+  background: transparent;
+  box-shadow: none;
   cursor: not-allowed;
 }
 
@@ -371,13 +386,25 @@
   text-decoration: underline;
 }
 
+.dantist-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+  width: 100%;
+  padding-top: 24px;
+}
+
 .dantist-hero__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   isolation: isolate;
   position: relative;
   z-index: 0;
   min-width: 184px;
   min-height: 48px;
-  margin-top: 24px;
+  margin: 0;
   padding: 12px 24px;
   overflow: visible;
   color: var(--hero-white);
@@ -390,6 +417,7 @@
   line-height: var(--hero-button-line);
   letter-spacing: 0.52px;
   text-align: center;
+  text-decoration: none;
   text-transform: uppercase;
   transition: transform 160ms ease;
 }
@@ -407,7 +435,6 @@
 .dantist-hero__submit::before {
   z-index: 0;
   background: linear-gradient(180deg, var(--hero-green-light) 0%, var(--hero-green) 100%);
-  animation: dantist-hero-submit-pulse 8s ease-in-out infinite;
 }
 
 .dantist-hero__submit::after {
@@ -436,20 +463,23 @@
   outline-offset: 3px;
 }
 
-@keyframes dantist-hero-submit-pulse {
-  0%,
-  86%,
-  100% {
-    box-shadow: inset 0 -2px 0 var(--hero-button-shadow), 0 0 0 0 var(--hero-green-transparent);
-  }
+.dantist-hero__phone-button {
+  min-width: 164px;
+  color: var(--hero-body);
+}
 
-  91% {
-    box-shadow: inset 0 -2px 0 var(--hero-button-shadow), 0 0 0 7px var(--hero-pulse);
-  }
+.dantist-hero__phone-button::before {
+  background: linear-gradient(180deg, var(--hero-phone-button-top) 0%, var(--hero-phone-button-bottom) 100%);
+  animation: none;
+}
 
-  96% {
-    box-shadow: inset 0 -2px 0 var(--hero-button-shadow), 0 0 0 14px var(--hero-pulse-transparent);
-  }
+.dantist-hero__phone-button::after {
+  background: linear-gradient(180deg, var(--hero-phone-button-hover-top) 0%, var(--hero-phone-button-hover-bottom) 100%);
+}
+
+.dantist-hero__phone-button::before,
+.dantist-hero__phone-button::after {
+  box-shadow: inset 0 -2px 0 var(--hero-phone-button-shadow);
 }
 
 @keyframes dantist-hero-invalid-shake {
@@ -609,7 +639,7 @@
     padding-top: 0;
   }
 
-  .dantist-hero__submit {
+  .dantist-hero__actions {
     grid-column: 2;
     grid-row: 2;
     justify-self: start;
@@ -691,6 +721,10 @@
     max-width: none;
   }
 
+  .dantist-hero__actions {
+    flex-direction: column;
+  }
+
   .dantist-hero__submit {
     width: 100%;
   }
@@ -717,7 +751,7 @@
   .dantist-hero__layer,
   .dantist-hero__initial,
   .dantist-hero__success,
-  .dantist-hero__field.is-shaking input,
+  .dantist-hero__field.is-shaking,
   .dantist-hero__consent.is-shaking .dantist-hero__checkbox,
   .dantist-hero__submit,
   .dantist-hero__submit::after {
