@@ -102,6 +102,15 @@
     phoneInput.setSelectionRange(caretPosition, caretPosition);
   };
 
+  const setPhoneCaretIfTextIsNotSelected = () => {
+    const selectionStart = phoneInput.selectionStart || 0;
+    const selectionEnd = phoneInput.selectionEnd || 0;
+
+    if (selectionStart === selectionEnd) {
+      setPhoneCaret();
+    }
+  };
+
   const normalizePhone = () => {
     phoneDigits = getPhoneDigitsFromValue(phoneInput.value);
     phoneInput.value = formatPhone();
@@ -221,7 +230,10 @@
   });
 
   normalizePhone();
-  phoneInput.addEventListener("focus", setPhoneCaret);
+  phoneInput.addEventListener("focus", () => {
+    requestAnimationFrame(setPhoneCaretIfTextIsNotSelected);
+  });
+  phoneInput.addEventListener("click", setPhoneCaretIfTextIsNotSelected);
   phoneInput.addEventListener("keydown", (event) => {
     if (event.ctrlKey || event.metaKey || event.altKey || event.key === "Tab") {
       return;

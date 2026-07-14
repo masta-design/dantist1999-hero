@@ -160,7 +160,7 @@
   font-weight: 400;
 }
 
-.dantist-hero__success-button {
+.dantist-hero__submit.dantist-hero__success-button {
   min-width: 140px;
   margin-top: 24px;
 }
